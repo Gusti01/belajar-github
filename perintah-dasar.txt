@@ -60,3 +60,5 @@ merupakan pointer untuk menuju ke hash yang paling akhir
 karena kadang sangat menyulitkan jika harus menuliskan hash value, jika kita ingin menuju pada hash paling baru kita bisa menggunkan kata head.
 
 #menambahkan file
+untuk menambahkan file ke repository, cukup dengan menambahkan file dalam folder saja.
+secara otomatis file yang kita tambahkan akan berada pada working directory
