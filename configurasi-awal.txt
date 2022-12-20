@@ -1,0 +1,30 @@
+pertama install git:
+https://git-scm.com/downloads
+download git pada link di atas
+sesuaikan dengan sistem operasi anda
+
+setelah itu install,
+untuk setiap konfigurasi dalam penginstalan gunakan default saja.
+
+setelah install, akan ada program baru dalam komputer anda,yaitu git bash.
+untuk memeriksa apakah git sudah terinstall dengan baik, buka git bash (bisa lewat menu start, search program, atau klik kanan git bash)
+setelah itu ketik perintah: git --version
+jika muncul versi git, berarti penginstalan git telah berhasil.
+
+setelah itu untuk menggunakan git, kita harus melakukan konfigurasi terlebih dahulu.
+buka kembali git bash, lalu ketikkan masing-masing baris perintah dibawah.
+
+
+primary configuration:
+$ git config --global user.name "your user name" -> untuk menset username global
+$ git config --global user.email "your email" -> untuk menset email global
+
+jika anda menggunakan VS Code atau ingin install VS Code integrasikan dengan git dengan menggunakan perintah di bawah:
+optional (for better experience using VS Code):
+
+$ git config --global core.editor "code --wait"
+$ git config --global diff.tool "default-difftool"
+$ git config --global difftool.default-difftool.cmd "code --wait --diff \$LOCAL \$REMOTE"
+
+untuk melihat keseluruhan konfigurasi:
+git config --list --show-origin
