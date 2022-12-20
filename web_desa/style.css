@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Arima:wght@700&family=Josefin+Sans:wght@100&family=Roboto:wght@500&display=swap');
+
+    @import url('https://fonts.googleapis.com/css2?family=Arima:wght@700&family=Josefin+Sans:wght@100&family=Mukta:wght@500;800&family=Roboto:wght@500&display=swap');
+
+    h3 {
+      font-family: 'Mukta', sans-serif;
+    }
+
+    .card-text {
+      font-family: 'Arima', cursive;
+    }
+
+    .judul {
+      font-family: 'Impact Regular';
+      color: dodgerblue;
+      
+      /* font-weight: 600; */
+    }
+
+    .subjudul {
+      font-family: 'Lucida Sans';
+      color: dodgerblue;
+    }
+
+    .red {
+      border: 5px solid red;
+    }
+
+    .paragraph {
+      padding: 50px;
+      font-size: 1.6em;
+      text-align: justify;
+    }
+
+    .text-color {
+      color: whitesmoke;
+    }
+
+    .section-title {
+      font-family: 'Century Gothic';
+      font-size: 2.2em;
+      font-weight: bolder;
+      margin-top: 20px;
+    }
+    .border-red {
+      border: 1px solid red;
+    }
+
+    nav {
+      font-family: 'Mukta';
+      font-weight: 100;
+    }
+
+    .highligt-effect {
+      background-color: whitesmoke;
+    }
+
+    .navbar {
+      min-height: 75px;
+    }
+
+    .card1:hover {
+      -webkit-box-shadow: -1px 9px 40px -12px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: -1px 9px 40px -12px rgba(0, 0, 0, 0.75);
+      box-shadow: -1px 9px 40px -12px rgba(0, 0, 0, 0.75);
+    }
