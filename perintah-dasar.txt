@@ -9,6 +9,7 @@ digunakan untuk menginisialisasi suatu folder sebagai repository git.
 #menambahkan file
 untuk menambahkan file ke repository, cukup dengan menambahkan file dalam folder saja.
 secara otomatis file yang kita tambahkan akan berada pada working directory
+--------------------------------------------------------------------------------------------
 
 #git status
 digunakan untuk mengecek perubahan apa saja yang terjadi.
@@ -28,6 +29,7 @@ untuk secara keseluruhan menambahkan semua file atau perubahan yang ada ke stagi
 
 atau jika ingin membatalkan pemindahan file ke staging index:
 git rm --cached nama file
+--------------------------------------------------------------------------------------------
 
 #menambahkan file ke repository (commit)
 git commit -m "message"
@@ -35,6 +37,7 @@ setiap perubahan yang ingin disimpan ke repository perlu memiliki pesan,
 sehingga nanti jika ingin kembali ke perubahan sebelumnya kita bisa mengidentifikasi dengan baik.
 perintah di atas akan memindahkan semua file yang ada di staging index ke repository secara permanent
 jadi setelah itu filenya atau perubahannya telah disimpan ke repository.
+--------------------------------------------------------------------------------------------
 
 #mengubah file
 jika melakukan perubahan file, hal ini dilakukan langsung saja pada file di working directory
@@ -45,6 +48,7 @@ ke staging index, lalu menyimpannya ke repository
 saat dilakukan git status, akan muncul status bahwa file telah di modifikasi
 beda saat baru pertama kali menambah file, munculnya untracked,
 jika kita modifikasi file yang sudah ada, munculnya modified.
+--------------------------------------------------------------------------------------------
 
 #melihat perubahan yang terjadi pada file
 digunakan perintah:
@@ -55,23 +59,26 @@ git add nama_file1 nama_file2 nama_file3 nama_file4 dst
 
 untuk menambahkan file secara keseluruhan pada di staging area:
 git add .
-
+--------------------------------------------------------------------------------------------
 
 #menghapus file
 untuk menghapus file cukup dengan menghapus file yang ada di working directory
 secara otomatis git akan mendeteksi file yang hilang
 lalu jika ingin menyimpan perubahannya secara permanent, kita perlu memindahkan ke staging index dan commit ke repository
+--------------------------------------------------------------------------------------------
 
 #membatalkan penambahan file baru pada working directory
 sebenarnya sama seperti sebelumnya, cukup menghapus file yang ada di working directory
 namun jika file terlalu banyak dan sulit untuk menghapus 1 per 1, bisa digunakan:
 git clean -f
 untuk menghapus semua file yang ditambahkan di working directory. ini saat file masih berada pada working directory
+--------------------------------------------------------------------------------------------
 
 #membatalkan perubahan file yang yang telah dilakukan
 menggunakan perintah:
 git restore nama_file
 pada saat berada di working directory
+--------------------------------------------------------------------------------------------
 
 #membatalkan penghapusan file yang telah dilakukan
 juga menggunakan perintah:
@@ -84,11 +91,13 @@ menggunakan perintah:
 git restore --staged nama_file
 
 setelah itu baru bisa gunakan git restore lagi.
+--------------------------------------------------------------------------------------------
 
 #membatalkan perubahan yang sudah terlanjur di commit
 tidak ada cara yang bisa kita lakukan untuk restore jika perubahan sudah terlanjur di commit
 yang bisa kita lakukan hanyalah rollback commit(reset) atau revert commit
 atau bisa dibilang kita kembali ke titik commit sebelumnya
+--------------------------------------------------------------------------------------------
 
 #commit log
 git adalah distributed version control, artinya walaupun repository ada di lokal komputer, semua riwayat perubahan disimpan di komputer kita
@@ -102,11 +111,13 @@ q untuk keluar
 
 untuk menjadikan log terlihat sederhana/menjadi lebih ringkas
 git log --oneline
+--------------------------------------------------------------------------------------------
 
 #graph
 saat branching kadang kita ingin melihat commit log dengan hubungannya dengan commit log sebelumnya
 hal ini bisa dilakukan dengan perintah:
 git log --oneline --graph
+--------------------------------------------------------------------------------------------
 
 #melihat detail commit
 jadi jika anda ingin melihat perubahan apa yang dilakukan pada suatu commit
@@ -115,6 +126,7 @@ git show hash
 
 atau untuk melihat detail perubahan dari HEAD bisa menggunakan:
 git show HEAD
+--------------------------------------------------------------------------------------------
 
 #compare commit
 fitur untuk membandingkan antara commit dengan commit lainnya.
@@ -122,8 +134,174 @@ namun bukan membandingkan perubahan datanya tapi membandingkan hasil commit.
 gunakan perintah:
 git diff hash1 hash2
 jadi perintah ini digunakan untuk melihat hasil perubahan pada tiap file yang ada di commit
+--------------------------------------------------------------------------------------------
 
 #git difftool
 sebelumnya pada file configuration mengatur visual studio code untuk melihat diff
 jadi jika ingin melihat perbedaan commit dengan vsc kita bisa gunakan perintah:
 git difftool hash1 hash2
+--------------------------------------------------------------------------------------------
+
+#rename file
+hal yang menarik dari git, git bisa mendeteksi rename file
+secara sederhana sebenarnya rename file merupakan operasi gabungan antara hapus file,
+lalu menambah file baru dengan isi yang sama
+namun, git bisa otomatis mendeteksi jika terjadi perubahan nama file,
+karena isi file sebagian besar masih sama.
+
+git add fileawal
+git add filerename
+--------------------------------------------------------------------------------------------
+
+#reset commit
+sebelumnya kita sudah tahu membatalkan commit, lalu bagaimana jika perubahan terlanjur
+di commit ke repository?
+untuk hal ini kita bisa menggunakan reset commit
+reset commit merupakan mekanisme dimana kita menggeser HEAD pointer ke posisi commit yang kita mau,
+artinya commit selanjutnya akan dilakukan pada posisi HEAD baru.
+untuk melakukan reset commit kita bisa menggunakan perintah:
+git reset <mode> hash
+jadi commit yang sudah di reset akan hilang
+
+
+ada beberapa mode pengaturan reset commit, yang sering digunakan,
+#mode git reset
+--soft (pilihan paling aman)
+memindahkan HEAD pointer, namun tidak melakukan perubahan apapun di Stagin g Index dan Working Directory
+perubahannya akan masih tetap ada di staging index dan working directory, sementara repository akan kembali ke head yang dituju
+
+--mixed (default),
+memindahkan HEAD pointer, mengubah Staging Index menjadi sama seperti dengan repository, namun tidak mengubah apapun di Working Directory.
+perubahannya masih ada di working directory, sementara staging index kembali ke head yang dituju
+
+--hard, 
+memindahkan HEAD pointer, dan mengubah Staging index dan Working Directory sehingga sama dengan Repository
+
+perlu diingat, selama teman-teman masih belum membuat commit baru setelah reset sebelumnya,
+teman-teman masih tetap bisa kembali ke commit head terbaru sebelumnya
+
+karena jika sudah buat commit baru, otomatis commit baru itu akan menimpa commit head yang sebelumnya
+--------------------------------------------------------------------------------------------
+
+#amend commit
+kadang saat commit mungkin ada beberapa hal yang terlupakan.
+biasanya kita akan lakukan reset soft ke commit sebelumnya,
+lalu tambahkan perubahan yang terlupakan, lalu kita commit ulang.
+hal tersebut bisa dilakukan tanpa manual melakukan rset, caranya bisa menggunakan perintah:
+git commit --amend
+
+perlu diingat, amend akan mengubah hash commit karena data perubahan yang dicommit bertambah
+jadi jika anda ingin kembali mereset commit dan menimpa commit yang tadi dengan perubahan baru
+gunakan git commit --amend -m "pesannya"
+--------------------------------------------------------------------------------------------
+
+#versi sebelumnya
+kadang kita sering mengalami masalah dengan file yang sudah kita commit ke repository
+git memiliki fitur dimana kita bisa melihat versi file pada commit sebelumnya
+saat kita ambil versi sebelumnya, file pada commit tersebut akan berada pada staging index
+untuk melakukannya kita bisa gunakan perintah:
+git checkout hash -- namafile
+
+jika ingin menyimpan tinggal commit lagi,
+namun jika tidak ingin menyimpan perubahan sebelumnya, gunakan 
+git restore --staged nama_file,
+lalu
+git restore nama_file
+--------------------------------------------------------------------------------------------
+
+#snapshot sebelumnya
+git juga memiliki fitur seperti mesin waktu, dimana kita bisa kembali pada snapshot sebelumnya
+kita bisa tentukan kemana tujuan snapshot kita hanya dengan menggunakan hash commit
+berbeda dengan reset, jika reset menghapus commit terbaru untuk kembali ke commit sebelumnya,
+jika checkout kita kembali ke commit sebelumnya, namun tetap bisa ke commit terbaru kembali
+jadi ini benar-benar diperuntukkan jika kita ingin melihat commit sebelumnya
+
+cara jika kita ingin menuju ke snapshot tertentu, cukup gunakan perintah:
+git checkout hash
+
+jika ingin kembali ke paling awal, kita bisa gunakan perintah:
+git checkout namabranch
+sebelum mencoba perintah diatas, periksa dulu posisi branch anda dimana dengan
+--------------------------------------------------------------------------------------------
+
+#git branch
+materi branching akan dibahas di course terpisah, namun secara default saat kita membuat git repository, maka secara otomatis git akan membuat branch
+untuk melihat nama branch saat ini, kita bisa gunakan perintah:
+git branch --show-current
+--------------------------------------------------------------------------------------------
+
+#revert commit
+git memiliki fitur revert commit,
+revert commit adalah fitur untuk membatalkan commit yang sudah kita lakukan,
+dengan cara membuat commit baru yang membatalkan commit sebelumnya
+
+jadi misal kita sudah melakukan commit data perubahan dari teks Saya menjadi Saya Makan,
+jika kita revert, secara otomatis akan membuat commit baru dengan melakukan perubahan dari
+Saya Makan menjadi Saya
+
+untuk melakukan revert commit, kita bisa gunakan perintah:
+git revert hash
+
+ini merupakan pilihan aman dibanding reset,
+karena ini akan membalikkan commit yang sudah kita lakukan sebelumnya lalu membuatkannya commit baru
+jadi jika ada yang dihapus, akan dikembalikan, dimodifikasi akan dikembalikan, sebelumnya
+ditambahkan akan dihapus
+--------------------------------------------------------------------------------------------
+
+#git ignore
+kadang saat membuat aplikasi, tidak semua file ingin kita track di git, contoh seperti file log,
+hasil kompilasi, kadang itu tidak butuh di track di git
+git memiliki fitur ignore, dimana kita bisa meminta git secara otomatis tidak men-track file di git
+caranya kita bisa tambahkan file .gitignore di repository
+lalu kita bisa tambahkan tiap baris di file .gitignore berisikan file atau folder yang tidak
+ingin kita track.
+
+jadi kita hanya perlu membuat sebuah file dengan name: 
+.gitignore
+
+dan pada filenya
+bisa kita isikan kode:
+
+#kode untuk ignore folder namafolder
+log/
+
+#untuk ignore file dengan extension .backup
+*.backup
+
+#ignore file namafile.txt
+namafile.txt
+
+jadi semua yg kita isikan ke dalam .gitignore tidak akan ditrack oleh git
+mau seberapa banyak pun bisa ditambahkan.
+--------------------------------------------------------------------------------------------
+
+#blame
+saat membuat kode program kadang kita ingin tahu, siapa yang menambahkan baris kode program tersebut, dan apa yang ditambahkan
+git memiliki fitur yang bernama blame, ini digunakan untuk mencari tahu, siapa yang menambah perubahan pada file dan juga untuk mengetahui commit-nya
+caranya kita bisa gunakan perintah:
+git blame namafile
+--------------------------------------------------------------------------------------------
+
+#alias
+git memiliki fitur yang bernama alias
+dengan alias, kita bisa menambah nama perintah lain untuk perintah yang sudah ada di git
+misal kita bisa menambah perintah co, komit untuk nama lain dari commit misalnya
+atau misal menambah alias logline untuk nama lain dari log --oneline
+
+cara menambahkan alias
+git config --global alias.nama_alias perintah_apa_yang_diberi_alias
+
+contoh:
+git config --global alias.ko commit
+git config --global alias.komit commit
+
+kalau perintah yg ingin diubah ada lebih dari satu kata gunakan tanda ""
+git config --global alias.logone "log --oneline"
+
+namun perlu diingat bahwa perubahan ini hanya berlaku di laptop/pc/komputer yang teman2 sudah
+configurasi, jika ingin menggunakan ke komputer lain, anda perlu configurasi kembali
+--------------------------------------------------------------------------------------------
+
+//MATERI SELANJUTNYA:
+GIT BRANCHING
+GIT REMOTE
