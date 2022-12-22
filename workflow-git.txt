@@ -1,0 +1,50 @@
+#workflow dari git
+//the three states
+merupakan hal yang perlu dipahami dan dimengerti dengan baik.
+git memiliki tiga state terhadap file kita:
+-modified, artinya kita mengubah (menambah, mengedit, menghapus) file namun belum disimpan secara permanent di repository
+-staged, artinya kita menandai modifikasi yang kita lakukan terhadap file akan disimpan secara permanent ke repository
+-commited, artinya data sudah aman disimpan dalam repository
+
+dalam hal ini juga, tidak harus semua file yang diubah yang harus disimpan.
+misalnya kita mengedit 5 file, namun hanya ingin menyimpan 3 file.
+hal ini dapat dilakukan di git.
+
+//three section
+three states yang sebelumnya tadi itu dilakukan pada section yang berbeda-beda.
+yaitu, 
+working directory, saat melakukan modifikasi hal itu terjadi pada section ini.
+staging area, section yang menyimpan semua informasi perubahan yang sudah siap untuk disimpan secara permanent.
+repository, section yang menjadi tempat semua file dan database riwayat versi file disimpan.
+
+diagram three tree:
+
+working directory ->(git add)-> staging index ->(git commit)-> repository
+
+workflow, bagaimana cara kerja git.
+secara sederhana semua perubahan yang terjadi akan dilakukan pada working directory (master)
+jika perubahan yang kita lakukan ingin kita simpan secara permanen, maka perlu kita tambahkan ke staging index
+jika sudah yakin dengan perubahannya, kita bisa melakukan penyimpanan baru secara permanen ke repository dengan menggunakan commit
+
+saat kita menyimpan file ke dalam repository, bukan berarti file versi sebelumnya akan dihapus, namun riwayat perubahannya akan tetap ada.
+jadi misalnya file versi 1 telah disimpan dalam repo, lalu akan ada versi 2, nah ketika versi 2 disimpan, versi 1 masih tetap ada sehingga kita bisa kembali ke file sebelumnya di setiap commit yang ada.
+
+#hash
+sebenarnya yang disimpan oleh git bukan file, melainkan riwayat perubahan, atau perubahan apa yang anda lakukan terhadap file, itu yang akan disimpan oleh git.
+ini yang disebut dengan snapshot atau rekaman.
+jadi snapshot berisikan semua perubahan yang terjadi terhadap file yang kita commit.
+setiap snapshot nantinya akan diberikan hash.
+
+nah pada git sendiri menggunakan algoritma sha-1 untuk menghitung hash.
+has merupakan checksum untuk menghitung perubahan yang terjadi pada setiap file yang di modifikasi.
+hash dibutuhkan untuk menjaga data integrity, sehingga tiap snapshot file yang ada tidak bisa diubah.
+
+git tidak hanya menyimpan snapshot,
+namun semua informasi mengenai modifikasi yang terjadi
+seperti parent (commit sebelumnya), saat pertama kali commit parent masih belum ada.
+author,
+message (deskripsi),
+
+#head
+merupakan pointer untuk menuju ke hash yang paling akhir
+karena kadang sangat menyulitkan jika harus menuliskan hash value, jika kita ingin menuju pada hash paling baru kita bisa menggunkan kata head.
